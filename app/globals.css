@@ -1,0 +1,6 @@
+/* 简洁黑白，保持可访问焦点样式 */
+:root { --outline: 3px; }
+a:focus-visible, button:focus-visible, .form-check-input:focus {
+  outline: var(--outline) solid currentColor; outline-offset: 2px;
+}
+code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
