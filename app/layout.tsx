@@ -9,10 +9,27 @@ export const metadata: Metadata = {
   description: "yanlongyang · 22519263 · CSE3CWA / CSE5006"
 };
 
-export default function RootLayout({ children }: any) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="d-flex flex-column min-vh-100">
+        {/* Title Layer - Above Navigation */}
+        <div className="bg-body border-bottom py-1">
+          <div className="container">
+            <div className="row justify-content-center">
+              <div className="col-md-10 col-lg-8">
+                <div className="d-flex justify-content-between align-items-center">
+                  <h1 className="h3 mb-0 text-start text-body">Title</h1>
+                  <div className="text-end">
+                    <span className="fw-semibold text-body">Student No. </span>
+                    <span className="text-body-secondary">22519263</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
         <Header />
         <main id="main" className="container my-4 flex-grow-1">{children}</main>
         <footer className="bg-body-tertiary border-top py-3 text-center">

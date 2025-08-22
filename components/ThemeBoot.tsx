@@ -1,3 +1,11 @@
 "use client";
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
-export default function ThemeBoot(){ return null; }
+import { useEffect } from "react";
+
+export default function ThemeBoot(){
+  useEffect(() => {
+    (async () => {
+      await import("bootstrap/dist/js/bootstrap.bundle.min.js");
+    })();
+  }, []);
+  return null;
+}
