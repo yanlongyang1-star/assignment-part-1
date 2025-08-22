@@ -61,7 +61,7 @@ ${panels}`;
 
   const copyHtml = async () => {
     await navigator.clipboard.writeText(htmlText);
-    alert("已复制！粘贴到 Hello.html 直接打开即可运行。");
+    alert("Copied! Paste the code above into Hello.html and double-click to run (pure HTML+JS, no dependencies).");
   };
 
   const addStep = () => {
@@ -133,7 +133,7 @@ ${panels}`;
             </div>
             <Form.Control as="textarea" id="output" ref={outRef} rows={18} value={htmlText} readOnly />
             <small className="text-body-secondary d-block mt-2">
-              复制上方代码保存为 <code>Hello.html</code>，双击打开即可运行（纯 HTML+JS，无依赖）。
+              Copy the code above and save as <code>Hello.html</code>, double-click to run (pure HTML+JS, no dependencies).
             </small>
           </Col>
         </Row>

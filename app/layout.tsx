@@ -37,7 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <strong>yanlongyang</strong>, <strong>22519263</strong>, 2025-08-19
           </small>
         </footer>
-        {/* 加载 Bootstrap JS（客户端执行） */}
+        {/* Load Bootstrap JS (client-side execution) */}
         <ThemeBoot />
       </body>
     </html>

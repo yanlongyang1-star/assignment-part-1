@@ -1,36 +1,217 @@
 "use client";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import ThemeToggle from "@/components/ThemeToggle";
+import { usePathname } from "next/navigation";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Header() {
+  const [open, setOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const pathname = usePathname();
+
+  const toggleMenu = () => {
+    setOpen(!open);
+  };
+
+  const closeMenu = () => {
+    setOpen(false);
+    // Return focus to hamburger button
+    buttonRef.current?.focus();
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      toggleMenu();
+    } else if (event.key === "Escape" && open) {
+      closeMenu();
+    }
+  };
+
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setOpen(false);
+      }
+    };
+
+    if (open) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [open]);
+
+  // Close menu when route changes
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
   return (
-    <nav className="navbar navbar-expand-lg bg-body border-bottom sticky-top">
+    <header className="bg-white border-bottom">
       <div className="container">
-        <Link className="navbar-brand fw-semibold" href="/">LTU A1</Link>
+        {/* Top Row: Student Number and Theme Toggle */}
+        <div className="d-flex justify-content-between align-items-center py-2">
+          {/* Student Number - Left Side */}
+          <div className="student-number">
+            <span className="h4 mb-0 fw-bold text-dark">22519263</span>
+          </div>
 
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#mainNav"
-          aria-controls="mainNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon" />
-        </button>
-
-        <div id="mainNav" className="collapse navbar-collapse">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item"><Link className="nav-link" href="/">Tabs</Link></li>
-            <li className="nav-item"><Link className="nav-link" href="/prelab">Pre-lab Questions</Link></li>
-            <li className="nav-item"><Link className="nav-link" href="/escape-room">Escape Room</Link></li>
-            <li className="nav-item"><Link className="nav-link" href="/coding-races">Coding Races</Link></li>
-            <li className="nav-item"><Link className="nav-link" href="/about">About</Link></li>
-          </ul>
-          <ThemeToggle />
+          {/* Theme Toggle - Right Side */}
+          <div className="theme-toggle">
+            <ThemeToggle />
+          </div>
         </div>
-      </div>
-    </nav>
+
+        {/* Bottom Row: Navigation and Hamburger */}
+        <div className="d-flex justify-content-between align-items-center py-2 border-top">
+          {/* Desktop Navigation Menu - Left Side */}
+          <div className="d-none d-lg-flex align-items-center">
+            <ul className="nav flex-row" role="menubar">
+              <li className="nav-item" role="none">
+                <Link 
+                  href="/generators/tabs" 
+                  className={`nav-link fw-medium px-3 ${pathname === "/generators/tabs" ? "active" : "text-dark"}`}
+                  role="menuitem"
+                >
+                  Tabs
+                </Link>
+              </li>
+              <li className="nav-item" role="none">
+                <Link 
+                  href="/prelab" 
+                  className={`nav-link fw-medium px-3 ${pathname === "/prelab" ? "active" : "text-dark"}`}
+                  role="menuitem"
+                >
+                  Pre-lab Questions
+                </Link>
+              </li>
+              <li className="nav-item" role="none">
+                <Link 
+                  href="/escape-room" 
+                  className={`nav-link fw-medium px-3 ${pathname === "/escape-room" ? "active" : "text-dark"}`}
+                  role="menuitem"
+                >
+                  Escape Room
+                </Link>
+              </li>
+              <li className="nav-item" role="none">
+                <Link 
+                  href="/coding-races" 
+                  className={`nav-link fw-medium px-3 ${pathname === "/coding-races" ? "active" : "text-dark"}`}
+                  role="menuitem"
+                >
+                  Coding Races
+                </Link>
+              </li>
+              <li className="nav-item" role="none">
+                <Link 
+                  href="/about" 
+                  className={`nav-link fw-medium px-3 ${pathname === "/about" ? "active" : "text-dark"}`}
+                  role="menuitem"
+                >
+                  About
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Hamburger Menu Button - Right Side (Mobile only) */}
+          <button
+            ref={buttonRef}
+            className="btn btn-link p-0 border-0 bg-transparent d-lg-none"
+            aria-label="Toggle menu"
+            aria-expanded={open}
+            aria-controls="main-menu"
+            onClick={toggleMenu}
+            onKeyDown={handleKeyDown}
+            style={{ minWidth: "44px", minHeight: "44px" }}
+          >
+            <div className="d-flex flex-column justify-content-center align-items-center">
+              <span className={`hamburger-line ${open ? 'rotate-45' : ''}`}></span>
+              <span className={`hamburger-line ${open ? 'opacity-0' : ''}`}></span>
+              <span className={`hamburger-line ${open ? 'rotate-negative-45' : ''}`}></span>
+            </div>
+          </button>
+        </div>
+
+        {/* Mobile Navigation Drawer - Only rendered when open */}
+        {open && (
+          <>
+            {/* Semi-transparent backdrop */}
+            <div 
+              className="fixed inset-0 bg-black bg-opacity-50 d-lg-none z-40"
+              onClick={closeMenu}
+            />
+            
+            {/* Drawer */}
+            <nav 
+              ref={menuRef}
+              id="main-menu" 
+              aria-label="Main"
+              className="fixed top-0 right-0 h-full w-64 bg-white shadow-lg d-lg-none z-50"
+              style={{ marginTop: '80px' }}
+            >
+              <ul className="nav flex-column p-4" role="menubar">
+                <li className="nav-item" role="none">
+                  <Link 
+                    href="/generators/tabs" 
+                    className={`nav-link fw-medium ${pathname === "/generators/tabs" ? "active" : "text-dark"}`}
+                    onClick={closeMenu}
+                    role="menuitem"
+                  >
+                    Tabs
+                  </Link>
+                </li>
+                <li className="nav-item" role="none">
+                  <Link 
+                    href="/prelab" 
+                    className={`nav-link fw-medium ${pathname === "/prelab" ? "active" : "text-dark"}`}
+                    onClick={closeMenu}
+                    role="menuitem"
+                  >
+                    Pre-lab Questions
+                  </Link>
+                </li>
+                <li className="nav-item" role="none">
+                  <Link 
+                    href="/escape-room" 
+                    className={`nav-link fw-medium ${pathname === "/escape-room" ? "active" : "text-dark"}`}
+                    onClick={closeMenu}
+                    role="menuitem"
+                  >
+                    Escape Room
+                  </Link>
+                </li>
+                <li className="nav-item" role="none">
+                  <Link 
+                    href="/coding-races" 
+                    className={`nav-link fw-medium ${pathname === "/coding-races" ? "active" : "text-dark"}`}
+                    onClick={closeMenu}
+                    role="menuitem"
+                  >
+                    Coding Races
+                  </Link>
+                </li>
+                <li className="nav-item" role="none">
+                  <Link 
+                    href="/about" 
+                    className={`nav-link fw-medium ${pathname === "/about" ? "active" : "text-dark"}`}
+                    onClick={closeMenu}
+                    role="menuitem"
+                  >
+                    About
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+          </>
+        )}
+              </div>
+      </header>
   );
 }

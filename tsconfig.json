@@ -13,11 +13,11 @@
     "isolatedModules": true,
     "jsx": "preserve",
 
-    // 关键：让 "@/..." 别名可用
+    // Key: Make "@/..." alias available
     "baseUrl": ".",
     "paths": { "@/*": ["./*"] },
 
-    // 让 React/Node 类型可见（即使我们下面不用也没关系）
+    // Make React/Node types visible (even if we don't use them below)
     "types": ["react", "react-dom", "node"],
 
     "forceConsistentCasingInFileNames": true,

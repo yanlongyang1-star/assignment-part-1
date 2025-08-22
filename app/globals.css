@@ -1,6 +1,280 @@
-/* 简洁黑白，保持可访问焦点样式 */
+/* Clean black and white, maintain accessible focus styles */
 :root { --outline: 3px; }
 a:focus-visible, button:focus-visible, .form-check-input:focus {
   outline: var(--outline) solid currentColor; outline-offset: 2px;
 }
 code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+
+/* Dark theme body styles */
+[data-bs-theme="dark"] body {
+  background-color: #212529 !important;
+  color: #ffffff !important;
+}
+
+[data-bs-theme="dark"] main {
+  background-color: #343a40 !important;
+  color: #ffffff !important;
+}
+
+[data-bs-theme="dark"] footer {
+  background-color: #495057 !important;
+  color: #ffffff !important;
+}
+
+/* Header Component Styles */
+header {
+  background-color: #ffffff !important;
+  border-bottom: 1px solid #000000 !important;
+  transition: all 0.3s ease;
+}
+
+.student-number span {
+  color: #000000 !important;
+  font-weight: 700 !important;
+  transition: color 0.3s ease;
+}
+
+/* Dark theme styles */
+[data-bs-theme="dark"] header {
+  background-color: #212529 !important;
+  border-bottom: 1px solid #495057 !important;
+}
+
+[data-bs-theme="dark"] .student-number span {
+  color: #ffffff !important;
+}
+
+[data-bs-theme="dark"] .nav-link {
+  color: #ffffff !important;
+}
+
+[data-bs-theme="dark"] .nav-link:hover {
+  background-color: #495057 !important;
+  color: #ffffff !important;
+}
+
+[data-bs-theme="dark"] .nav-link.active {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+[data-bs-theme="dark"] .btn-link {
+  color: #ffffff !important;
+}
+
+[data-bs-theme="dark"] .hamburger-line {
+  background-color: #ffffff !important;
+}
+
+/* Header layout improvements */
+header .container {
+  padding: 0;
+}
+
+header .border-top {
+  border-top: 1px solid #e0e0e0 !important;
+}
+
+/* Navigation styling */
+.nav-item {
+  margin-right: 0.5rem;
+}
+
+.nav-item:last-child {
+  margin-right: 0;
+}
+
+.hamburger-line {
+  width: 20px;
+  height: 2px;
+  background-color: #000;
+  margin: 2px 0;
+  transition: all 0.3s ease;
+  border-radius: 1px;
+}
+
+.rotate-45 {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.rotate-negative-45 {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+.opacity-0 {
+  opacity: 0;
+}
+
+.nav-link {
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  color: #000000 !important;
+  background-color: transparent;
+}
+
+.nav-link:hover {
+  background-color: #f0f0f0;
+  color: #000000 !important;
+}
+
+.nav-link:focus {
+  outline: 3px solid #000000;
+  outline-offset: 2px;
+  background-color: #f0f0f0;
+  color: #000000 !important;
+}
+
+.nav-link.active {
+  background-color: #000000;
+  color: #ffffff !important;
+  font-weight: 600;
+}
+
+/* Ensure all text in header is black */
+header * {
+  color: #000000;
+}
+
+/* Override Bootstrap text colors */
+.text-dark {
+  color: #000000 !important;
+}
+
+/* Button styling for hamburger */
+.btn-link {
+  color: #000000 !important;
+  display: block !important;
+}
+
+.btn-link:hover {
+  color: #000000 !important;
+  background-color: #f0f0f0;
+}
+
+/* Theme toggle styling */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+}
+
+/* Ensure hamburger button is visible */
+.d-lg-none {
+  display: block !important;
+}
+
+/* Ensure hamburger button is visible */
+.d-lg-none {
+  display: block !important;
+}
+
+.d-lg-flex {
+  display: none !important;
+}
+
+@media (min-width: 992px) {
+  .d-lg-none {
+    display: none !important;
+  }
+  
+  .d-lg-flex {
+    display: flex !important;
+  }
+}
+
+/* Force hamburger button visibility on small screens */
+@media (max-width: 991px) {
+  .d-lg-none {
+    display: block !important;
+  }
+  
+  .d-lg-flex {
+    display: none !important;
+  }
+}
+
+/* Debug: Force hamburger button to be visible */
+button[aria-controls="main-menu"] {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Ensure hamburger lines are visible */
+.hamburger-line {
+  display: block !important;
+  visibility: visible !important;
+}
+
+.btn:focus {
+  outline: 3px solid #000;
+  outline-offset: 2px;
+}
+
+/* Mobile drawer animations */
+.fixed {
+  transition: transform 0.2s ease;
+}
+
+/* Ensure proper z-index layering */
+.z-40 {
+  z-index: 40;
+}
+
+.z-50 {
+  z-index: 50;
+}
+
+/* Mobile drawer styling */
+#main-menu {
+  background-color: #ffffff !important;
+  border-left: 1px solid #000000;
+  transition: all 0.3s ease;
+}
+
+#main-menu .nav-link {
+  color: #000000 !important;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+#main-menu .nav-link:hover {
+  background-color: #f0f0f0;
+  color: #000000 !important;
+}
+
+#main-menu .nav-link.active {
+  background-color: #000000;
+  color: #ffffff !important;
+}
+
+/* Dark theme mobile drawer */
+[data-bs-theme="dark"] #main-menu {
+  background-color: #212529 !important;
+  border-left: 1px solid #495057;
+}
+
+[data-bs-theme="dark"] #main-menu .nav-link {
+  color: #ffffff !important;
+  border-bottom: 1px solid #495057;
+}
+
+[data-bs-theme="dark"] #main-menu .nav-link:hover {
+  background-color: #495057;
+  color: #ffffff !important;
+}
+
+[data-bs-theme="dark"] #main-menu .nav-link.active {
+  background-color: #ffffff;
+  color: #000000 !important;
+}
+
+/* Backdrop styling */
+.bg-black.bg-opacity-50 {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Dark theme backdrop */
+[data-bs-theme="dark"] .bg-black.bg-opacity-50 {
+  background-color: rgba(0, 0, 0, 0.7) !important;
+}
