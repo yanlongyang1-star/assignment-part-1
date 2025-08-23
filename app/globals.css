@@ -7,17 +7,17 @@ code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospac
 
 /* Dark theme body styles */
 [data-bs-theme="dark"] body {
-  background-color: #212529 !important;
+  background-color: #1a1a1a !important;
   color: #ffffff !important;
 }
 
 [data-bs-theme="dark"] main {
-  background-color: #343a40 !important;
+  background-color: #2d2d2d !important;
   color: #ffffff !important;
 }
 
 [data-bs-theme="dark"] footer {
-  background-color: #495057 !important;
+  background-color: #404040 !important;
   color: #ffffff !important;
 }
 
@@ -296,6 +296,43 @@ button[aria-controls="mobile-menu"] {
   transition: all 0.2s ease;
 }
 
+/* Focus styles for About page */
+.card:focus-within {
+  outline: 2px solid #111 !important;
+  outline-offset: 2px !important;
+}
+
+[data-bs-theme="dark"] .card:focus-within {
+  outline: 2px solid #ffffff !important;
+  outline-offset: 2px !important;
+}
+
+/* Focus styles for Tabs page */
+.nav-link[role="tab"]:focus,
+.nav-link[role="tab"]:focus-visible {
+  outline: 2px solid #111 !important;
+  outline-offset: 2px !important;
+}
+
+[data-bs-theme="dark"] .nav-link[role="tab"]:focus,
+[data-bs-theme="dark"] .nav-link[role="tab"]:focus-visible {
+  outline: 2px solid #ffffff !important;
+  outline-offset: 2px !important;
+}
+
+/* Tab panel focus styles */
+[role="tabpanel"]:focus,
+[role="tabpanel"]:focus-visible {
+  outline: 2px solid #111 !important;
+  outline-offset: 2px !important;
+}
+
+[data-bs-theme="dark"] [role="tabpanel"]:focus,
+[data-bs-theme="dark"] [role="tabpanel"]:focus-visible {
+  outline: 2px solid #ffffff !important;
+  outline-offset: 2px !important;
+}
+
 .card:focus-within {
   box-shadow: 0 0 0 3px #000000, 0 4px 8px rgba(0, 0, 0, 0.1) !important;
 }
@@ -341,6 +378,36 @@ video:hover {
 /* Enhanced mobile menu styling */
 #mobile-menu .nav-item {
   margin-bottom: 0.5rem;
+}
+
+/* Focus styles for Header components */
+.nav-link:focus,
+.btn:focus,
+button:focus {
+  outline: 2px solid #111 !important;
+  outline-offset: 2px !important;
+}
+
+[data-bs-theme="dark"] .nav-link:focus,
+[data-bs-theme="dark"] .btn:focus,
+[data-bs-theme="dark"] button:focus {
+  outline: 2px solid #ffffff !important;
+  outline-offset: 2px !important;
+}
+
+/* Ensure proper focus visibility */
+.nav-link:focus-visible,
+.btn:focus-visible,
+button:focus-visible {
+  outline: 2px solid #111 !important;
+  outline-offset: 2px !important;
+}
+
+[data-bs-theme="dark"] .nav-link:focus-visible,
+[data-bs-theme="dark"] .btn:focus-visible,
+[data-bs-theme="dark"] button:focus-visible {
+  outline: 2px solid #ffffff !important;
+  outline-offset: 2px !important;
 }
 
 /* Debug: Ensure mobile menu is visible */

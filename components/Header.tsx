@@ -71,7 +71,8 @@ export default function Header() {
         <div className="d-flex justify-content-between align-items-center py-2 border-top">
                            {/* Desktop Navigation Menu - Left Side */}
                  <div className="hidden lg:flex align-items-center">
-            <ul className="nav flex-row" role="menubar">
+                   <nav aria-label="Main">
+                     <ul className="nav flex-row" role="menubar">
               <li className="nav-item" role="none">
                 <Link 
                   href="/generators/tabs" 
@@ -118,7 +119,8 @@ export default function Header() {
                 </Link>
               </li>
             </ul>
-          </div>
+                   </nav>
+                 </div>
 
           {/* Hamburger Menu Button - Right Side (Mobile only) */}
           <button
@@ -196,7 +198,7 @@ export default function Header() {
                 transition: 'transform 220ms ease, opacity 220ms ease'
               }}
             >
-              <ul id="mobile-menu" className="nav flex-column p-4" role="menubar">
+              <ul className="nav flex-column p-4" role="menubar">
                 <li className="nav-item" role="none">
                   <Link 
                     href="/tabs" 
