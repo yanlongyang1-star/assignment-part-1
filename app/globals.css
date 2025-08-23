@@ -185,11 +185,11 @@ header * {
 
 /* Force hamburger button visibility on small screens */
 @media (max-width: 991px) {
-  .lg\\:hidden {
+  .lg\:hidden {
     display: block !important;
   }
   
-  .lg\\:flex {
+  .lg\:flex {
     display: none !important;
   }
 }
