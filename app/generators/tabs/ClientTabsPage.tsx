@@ -90,12 +90,43 @@ ${panels}`;
       <Tab.Container activeKey={activeKey} onSelect={(k)=>k && setActiveKey(k)} defaultActiveKey={tabs[1].key}>
         <Row>
           <Col sm={3}>
-            <Nav variant="pills" className="flex-column">
-              {tabs.map(t => (
+            <Nav variant="pills" className="flex-column" role="tablist" aria-label="Tabs">
+              {tabs.map((t, index) => (
                 <Nav.Item key={t.key} className="d-flex align-items-center justify-content-between">
-                  <Nav.Link eventKey={t.key} className="flex-grow-1">{t.title}</Nav.Link>
-                  <Button size="sm" variant="outline-secondary" className="ms-2"
-                    onClick={()=>removeStep(t.key)} aria-label={`Remove ${t.title}`}>✕</Button>
+                  <Nav.Link 
+                    eventKey={t.key} 
+                    className="flex-grow-1"
+                    role="tab"
+                    aria-selected={t.key === activeKey}
+                    aria-controls={`panel-${index}`}
+                    id={`tab-${index}`}
+                    onKeyDown={(e) => {
+                      if (e.key === 'ArrowLeft') {
+                        const prevIndex = index === 0 ? tabs.length - 1 : index - 1;
+                        setActiveKey(tabs[prevIndex].key);
+                      } else if (e.key === 'ArrowRight') {
+                        const nextIndex = index === tabs.length - 1 ? 0 : index + 1;
+                        setActiveKey(tabs[nextIndex].key);
+                      }
+                    }}
+                  >
+                    {t.title}
+                  </Nav.Link>
+                  <Button 
+                    size="sm" 
+                    variant="outline-secondary" 
+                    className="ms-2"
+                    onClick={()=>removeStep(t.key)} 
+                    aria-label={`Remove ${t.title}`}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        removeStep(t.key);
+                      }
+                    }}
+                  >
+                    ✕
+                  </Button>
                 </Nav.Item>
               ))}
             </Nav>
@@ -103,24 +134,37 @@ ${panels}`;
 
           <Col sm={5}>
             <Tab.Content>
-              {tabs.map(t => (
+              {tabs.map((t, index) => (
                 <Tab.Pane key={t.key} eventKey={t.key}>
-                  <Card className="mb-3">
-                    <Card.Header className="fw-semibold">{t.title} Content</Card.Header>
-                    <Card.Body>
-                      <ol className="ps-3">
-                        {t.lines.map((ln, i) => (
-                          <li key={i} className="mb-2">
-                            <Form.Control
-                              value={ln}
-                              onChange={(e)=>updateLine(t.key, i, e.currentTarget.value)}
-                              aria-label={`Step ${t.title} line ${i+1}`}
-                            />
-                          </li>
-                        ))}
-                      </ol>
-                    </Card.Body>
-                  </Card>
+                  <div 
+                    role="tabpanel" 
+                    id={`panel-${index}`}
+                    aria-labelledby={`tab-${index}`}
+                    tabIndex={0}
+                  >
+                    <Card className="mb-3">
+                      <Card.Header className="fw-semibold">{t.title} Content</Card.Header>
+                      <Card.Body>
+                        <ol className="ps-3">
+                          {t.lines.map((ln, i) => (
+                            <li key={i} className="mb-2">
+                              <Form.Control
+                                value={ln}
+                                onChange={(e)=>updateLine(t.key, i, e.currentTarget.value)}
+                                aria-label={`Step ${t.title} line ${i+1}`}
+                                onKeyDown={(e) => {
+                                  if (e.key === 'Enter' || e.key === ' ') {
+                                    e.preventDefault();
+                                    e.currentTarget.blur();
+                                  }
+                                }}
+                              />
+                            </li>
+                          ))}
+                        </ol>
+                      </Card.Body>
+                    </Card>
+                  </div>
                 </Tab.Pane>
               ))}
             </Tab.Content>

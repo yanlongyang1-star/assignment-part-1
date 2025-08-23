@@ -69,9 +69,10 @@ export default function Header() {
 
         {/* Bottom Row: Navigation and Hamburger */}
         <div className="d-flex justify-content-between align-items-center py-2 border-top">
-          {/* Desktop Navigation Menu - Left Side */}
-          <div className="d-none d-lg-flex align-items-center">
-            <ul className="nav flex-row" role="menubar">
+                           {/* Desktop Navigation Menu - Left Side */}
+                 <div className="hidden lg:flex align-items-center">
+                   <nav aria-label="Main">
+                     <ul className="nav flex-row" role="menubar">
               <li className="nav-item" role="none">
                 <Link 
                   href="/generators/tabs" 
@@ -118,23 +119,58 @@ export default function Header() {
                 </Link>
               </li>
             </ul>
-          </div>
+                   </nav>
+                 </div>
 
           {/* Hamburger Menu Button - Right Side (Mobile only) */}
           <button
             ref={buttonRef}
-            className="btn btn-link p-0 border-0 bg-transparent d-lg-none"
+            className="btn btn-link p-0 border-0 bg-transparent lg:hidden"
             aria-label="Toggle menu"
             aria-expanded={open}
-            aria-controls="main-menu"
+            aria-controls="mobile-menu"
             onClick={toggleMenu}
             onKeyDown={handleKeyDown}
             style={{ minWidth: "44px", minHeight: "44px" }}
           >
             <div className="d-flex flex-column justify-content-center align-items-center">
-              <span className={`hamburger-line ${open ? 'rotate-45' : ''}`}></span>
-              <span className={`hamburger-line ${open ? 'opacity-0' : ''}`}></span>
-              <span className={`hamburger-line ${open ? 'rotate-negative-45' : ''}`}></span>
+              <span 
+                className="hamburger-line"
+                style={{
+                  display: 'block',
+                  width: '22px',
+                  height: '2px',
+                  background: '#111',
+                  margin: '4px 0',
+                  transition: 'transform 180ms ease, opacity 180ms ease',
+                  transform: open ? 'translateY(6px) rotate(45deg)' : 'none'
+                }}
+              ></span>
+              <span 
+                className="hamburger-line"
+                style={{
+                  display: 'block',
+                  width: '22px',
+                  height: '2px',
+                  background: '#111',
+                  margin: '4px 0',
+                  transition: 'transform 180ms ease, opacity 180ms ease',
+                  transform: open ? 'scaleX(0)' : 'none',
+                  opacity: open ? 0 : 1
+                }}
+              ></span>
+              <span 
+                className="hamburger-line"
+                style={{
+                  display: 'block',
+                  width: '22px',
+                  height: '2px',
+                  background: '#111',
+                  margin: '4px 0',
+                  transition: 'transform 180ms ease, opacity 180ms ease',
+                  transform: open ? 'translateY(-6px) rotate(-45deg)' : 'none'
+                }}
+              ></span>
             </div>
           </button>
         </div>
@@ -144,23 +180,29 @@ export default function Header() {
           <>
             {/* Semi-transparent backdrop */}
             <div 
-              className="fixed inset-0 bg-black bg-opacity-50 d-lg-none z-40"
+              className="fixed inset-0 bg-black bg-opacity-50 lg:hidden z-40"
               onClick={closeMenu}
             />
             
             {/* Drawer */}
             <nav 
               ref={menuRef}
-              id="main-menu" 
-              aria-label="Main"
-              className="fixed top-0 right-0 h-full w-64 bg-white shadow-lg d-lg-none z-50"
-              style={{ marginTop: '80px' }}
+              id="mobile-menu" 
+              aria-label="Mobile"
+              className="fixed top-0 right-0 h-full w-64 bg-white shadow-lg lg:hidden z-50"
+              style={{ 
+                top: '120px',
+                transform: open ? 'translateX(0)' : 'translateX(100%)',
+                opacity: open ? 1 : 0,
+                pointerEvents: open ? 'auto' : 'none',
+                transition: 'transform 220ms ease, opacity 220ms ease'
+              }}
             >
               <ul className="nav flex-column p-4" role="menubar">
                 <li className="nav-item" role="none">
                   <Link 
-                    href="/generators/tabs" 
-                    className={`nav-link fw-medium ${pathname === "/generators/tabs" ? "active" : "text-dark"}`}
+                    href="/tabs" 
+                    className={`nav-link fw-medium ${pathname === "/tabs" ? "active" : "text-dark"}`}
                     onClick={closeMenu}
                     role="menuitem"
                   >
@@ -211,7 +253,7 @@ export default function Header() {
             </nav>
           </>
         )}
-              </div>
+      </div>
       </header>
   );
 }
