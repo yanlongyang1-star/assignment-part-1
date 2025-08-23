@@ -185,17 +185,17 @@ header * {
 
 /* Force hamburger button visibility on small screens */
 @media (max-width: 991px) {
-  .d-lg-none {
+  .lg\\:hidden {
     display: block !important;
   }
   
-  .d-lg-flex {
+  .lg\\:flex {
     display: none !important;
   }
 }
 
 /* Debug: Force hamburger button to be visible */
-button[aria-controls="main-menu"] {
+button[aria-controls="mobile-menu"] {
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -205,6 +205,11 @@ button[aria-controls="main-menu"] {
 .hamburger-line {
   display: block !important;
   visibility: visible !important;
+}
+
+/* Dark theme hamburger button */
+[data-bs-theme="dark"] .hamburger-line {
+  background-color: #ffffff !important;
 }
 
 .btn:focus {
@@ -227,44 +232,51 @@ button[aria-controls="main-menu"] {
 }
 
 /* Mobile drawer styling */
-#main-menu {
+#mobile-menu {
   background-color: #ffffff !important;
   border-left: 1px solid #000000;
-  transition: all 0.3s ease;
+  position: fixed !important;
+  top: 120px !important;
+  right: 0 !important;
+  height: calc(100vh - 120px) !important;
+  width: 256px !important;
+  z-index: 9999 !important;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1) !important;
 }
 
-#main-menu .nav-link {
+#mobile-menu .nav-link {
   color: #000000 !important;
   border-bottom: 1px solid #f0f0f0;
 }
 
-#main-menu .nav-link:hover {
+#mobile-menu .nav-link:hover {
   background-color: #f0f0f0;
   color: #000000 !important;
 }
 
-#main-menu .nav-link.active {
+#mobile-menu .nav-link.active {
   background-color: #000000;
   color: #ffffff !important;
 }
 
 /* Dark theme mobile drawer */
-[data-bs-theme="dark"] #main-menu {
+[data-bs-theme="dark"] #mobile-menu {
   background-color: #212529 !important;
   border-left: 1px solid #495057;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3) !important;
 }
 
-[data-bs-theme="dark"] #main-menu .nav-link {
+[data-bs-theme="dark"] #mobile-menu .nav-link {
   color: #ffffff !important;
   border-bottom: 1px solid #495057;
 }
 
-[data-bs-theme="dark"] #main-menu .nav-link:hover {
+[data-bs-theme="dark"] #mobile-menu .nav-link:hover {
   background-color: #495057;
   color: #ffffff !important;
 }
 
-[data-bs-theme="dark"] #main-menu .nav-link.active {
+[data-bs-theme="dark"] #mobile-menu .nav-link.active {
   background-color: #ffffff;
   color: #000000 !important;
 }
@@ -277,4 +289,84 @@ button[aria-controls="main-menu"] {
 /* Dark theme backdrop */
 [data-bs-theme="dark"] .bg-black.bg-opacity-50 {
   background-color: rgba(0, 0, 0, 0.7) !important;
+}
+
+/* About page specific styles */
+.card {
+  transition: all 0.2s ease;
+}
+
+.card:focus-within {
+  box-shadow: 0 0 0 3px #000000, 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+.card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Video player accessibility */
+video:focus {
+  outline: 3px solid #000000 !important;
+  outline-offset: 2px !important;
+}
+
+video:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Dark theme about page */
+[data-bs-theme="dark"] .card {
+  background-color: #343a40 !important;
+  border-color: #495057 !important;
+  color: #ffffff !important;
+}
+
+[data-bs-theme="dark"] .card:focus-within {
+  box-shadow: 0 0 0 3px #ffffff, 0 4px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
+[data-bs-theme="dark"] .card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
+[data-bs-theme="dark"] video:focus {
+  outline: 3px solid #ffffff !important;
+  outline-offset: 2px !important;
+}
+
+[data-bs-theme="dark"] video:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Enhanced mobile menu styling */
+#mobile-menu .nav-item {
+  margin-bottom: 0.5rem;
+}
+
+/* Debug: Ensure mobile menu is visible */
+#mobile-menu {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+#mobile-menu ul {
+  display: block !important;
+  visibility: visible !important;
+}
+
+#mobile-menu .nav-link {
+  padding: 1rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+#mobile-menu .nav-link:focus {
+  outline: 3px solid #000000;
+  outline-offset: 2px;
+}
+
+[data-bs-theme="dark"] #mobile-menu .nav-link:focus {
+  outline: 3px solid #ffffff;
+  outline-offset: 2px;
 }
