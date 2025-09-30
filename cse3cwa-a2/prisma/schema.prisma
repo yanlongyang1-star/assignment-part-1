@@ -1,0 +1,35 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Room {
+  id        String   @id @default(uuid())
+  title     String
+  stages    Stage[]
+  createdAt DateTime @default(now())
+}
+
+model Stage {
+  id     String @id @default(uuid())
+  label  String
+  order  Int
+  roomId String
+  room   Room   @relation(fields: [roomId], references: [id], onDelete: Cascade)
+
+  @@index([roomId])
+}
+
+model Feedback {
+  id        String   @id @default(uuid())
+  actor     String
+  notes     String
+  createdAt DateTime @default(now())
+}
