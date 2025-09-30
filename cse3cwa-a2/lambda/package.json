@@ -1,0 +1,17 @@
+{
+  "name": "escape-room-lambda",
+  "version": "1.0.0",
+  "description": "AWS Lambda function to generate HTML from room data",
+  "type": "module",
+  "main": "index.mjs",
+  "scripts": {
+    "test": "node test-local.mjs"
+  },
+  "keywords": [
+    "lambda",
+    "aws",
+    "html-generator"
+  ],
+  "author": "",
+  "license": "MIT"
+}
